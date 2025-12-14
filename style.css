@@ -124,16 +124,16 @@ header {
 /* fine header  */
 
 .home {
-  margin: 180px 12%;
+  margin: 180px auto;
+  padding: 0 12%;
   max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .home-container {
   display: flex;
   gap: 8rem;
   align-items: center;
+  justify-content: center;
 }
 
 .home-p {
@@ -151,6 +151,12 @@ header {
 .home-s {
   font-weight: bold;
   color: #666;
+}
+
+.info-home {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .info-home h1 {
@@ -192,12 +198,15 @@ header {
   font-size: 15px;
   padding-bottom: 25px;
   font-weight: 500;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .btnn {
   display: flex;
   gap: 1rem;
   padding-bottom: 30px;
+  justify-content: center;
 }
 
 .btn-home1 {
@@ -252,6 +261,7 @@ hr {
 .follow {
   display: flex;
   gap: 1rem;
+  justify-content: center;
 }
 
 .follow ul {
@@ -355,8 +365,11 @@ hr {
 }
 
 .about-info{
-    text-align: left;
+    text-align: center;
     margin-bottom: 30px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .about h2{
@@ -423,14 +436,14 @@ hr {
 
 
 .project{
-    margin: 180px 12%;
+    margin: 180px auto;
+    padding: 0 12%;
     max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    text-align: center;
 }
 
 .project p{
@@ -454,6 +467,9 @@ hr {
 
 .info-pro{
     padding-top: 20px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .info-pro p{
@@ -476,6 +492,10 @@ hr {
   box-shadow: 0 8px 30px rgba(0,0,0,0.08);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid #f0f0f0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .project-card:hover {
@@ -516,6 +536,11 @@ hr {
 
 .skills {
   margin-bottom: 20px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
 }
 
 .skills a {
@@ -545,6 +570,7 @@ hr {
   display: flex;
   justify-content: center;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .btn {
