@@ -88,7 +88,7 @@ cards.forEach(card => {
 });
 
 const typingElement = document.querySelector('.info-home h3'); 
-const words = ["Frontend Developer", "UI/UX Designer", "Web Enthusiast", "React Developer"];
+const words = ["Fullstack Developer", "Internal Network Hacking", "Server Hacking"];
 let wordIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
@@ -116,6 +116,29 @@ function type() {
 }
 
 document.addEventListener('DOMContentLoaded', type);
+
+// 버튼 기능 추가
+const hireBtn = document.querySelector('.btn-home1');
+const downloadBtn = document.querySelector('.btn-home2');
+
+if (hireBtn) {
+  hireBtn.addEventListener('click', () => {
+    window.location.href = 'mailto:amine@example.com?subject=프리랜서 작업 문의';
+  });
+}
+
+if (downloadBtn) {
+  downloadBtn.addEventListener('click', () => {
+    // CV 파일이 있다면 다운로드, 없다면 알림
+    const cvUrl = 'cv.pdf'; // CV 파일 경로
+    const link = document.createElement('a');
+    link.href = cvUrl;
+    link.download = 'Kalpha_Dev_CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const loadingText = document.getElementById("loading-text");

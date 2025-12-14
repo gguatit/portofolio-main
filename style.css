@@ -59,7 +59,10 @@ header {
 /* fine header  */
 
 .home {
-  margin: 160px 200px;
+  margin: 160px 10%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .home-container {
@@ -177,8 +180,19 @@ hr {
 
 /* fine home  */
 
+.section-label {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #666;
+}
+
 .about{
-    margin: 160px 200px;
+    margin: 160px 10%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .about p{
@@ -255,7 +269,10 @@ hr {
 
 
 .project{
-    margin: 160px 200px;
+    margin: 160px 10%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     align-items: center;
     justify-content: center;
