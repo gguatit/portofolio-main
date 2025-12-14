@@ -119,26 +119,25 @@ document.addEventListener('DOMContentLoaded', type);
 
 // 버튼 기능 추가
 const hireBtn = document.querySelector('.btn-home1');
-const downloadBtn = document.querySelector('.btn-home2');
 
 if (hireBtn) {
   hireBtn.addEventListener('click', () => {
-    window.location.href = 'mailto:amine@example.com?subject=프리랜서 작업 문의';
+    window.location.href = 'mailto:dev@kalpha.kr?subject=프리랜서 작업 문의';
   });
 }
 
-if (downloadBtn) {
-  downloadBtn.addEventListener('click', () => {
-    // CV 파일이 있다면 다운로드, 없다면 알림
-    const cvUrl = 'cv.pdf'; // CV 파일 경로
-    const link = document.createElement('a');
-    link.href = cvUrl;
-    link.download = 'Kalpha_Dev_CV.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  });
-}
+// 모바일 네비게이션
+const mobileMenuBtn = document.createElement('div');
+mobileMenuBtn.className = 'mobile-menu-btn';
+mobileMenuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+document.querySelector('.header-list').prepend(mobileMenuBtn);
+
+mobileMenuBtn.addEventListener('click', () => {
+  document.querySelector('.ul-list').classList.toggle('mobile-active');
+  const icon = mobileMenuBtn.querySelector('i');
+  icon.classList.toggle('fa-bars');
+  icon.classList.toggle('fa-times');
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   const loadingText = document.getElementById("loading-text");
