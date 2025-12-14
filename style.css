@@ -369,7 +369,7 @@ hr {
 
 .card{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 40px;
     width: 100%;
     max-width: 1000px;
@@ -969,7 +969,8 @@ body {
   }
 
   .home, .about, .project, .services, .contact {
-    margin: 100px 20px;
+    margin: 100px 15px;
+    padding: 0;
   }
 
   .home-container, .about-container, .contact-content {
@@ -977,7 +978,11 @@ body {
     gap: 2rem;
   }
 
-  .projects-container, .services-container {
+  .home-container {
+    gap: 1.5rem;
+  }
+
+  .projects-container, .services-container, .card {
     grid-template-columns: 1fr;
     gap: 20px;
   }
@@ -1073,28 +1078,39 @@ body {
     z-index: 1; 
   }
 
+  .card {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding: 0 10px;
+  }
+
   .card .c1 {
     width: 100%;
-    max-width: 300px;
+    max-width: 100%;
     text-align: center;
-    margin: 0 auto;
+    margin: 0;
+    padding: 35px 25px;
   }
 
   .home img {
     width: 100%;
-    max-width: 300px;
+    max-width: 100%;
     height: auto;
     display: block;
-    margin: 0 auto 15px auto;
+    margin: 0 auto 20px auto;
     object-fit: cover;
+  }
+
+  .project-card {
+    padding: 20px;
   }
 
   .project-card img {
     width: 100%;
-    max-width: 300px;
-    height: 180px;
+    max-width: 100%;
+    height: 200px;
     display: block;
-    margin: 0 auto 15px auto;
+    margin: 0 0 15px 0;
     object-fit: cover;
   }
 
@@ -1107,12 +1123,32 @@ body {
     object-fit: cover;
   }
 
-  .info-home h1 { font-size: 26px; }
-  .info-home h3 { font-size: 18px; }
+  .info-home h1 { 
+    font-size: 32px;
+    margin-bottom: 15px;
+  }
+  .info-home h3 { 
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
   .info-p, .info-p2, .home-p, .about p, .project p, .service-card p, .contact p {
     font-size: 14px;
   }
-  .project-card h3, .service-card h3 { font-size: 16px; }
+  .project-card h3, .service-card h3 { 
+    font-size: 18px;
+  }
+  .c1 h3 {
+    font-size: 1.2rem;
+  }
+  .c1 p {
+    font-size: 14px;
+  }
+  .about h1, .project h1 {
+    font-size: 2rem;
+  }
+  .about h2 {
+    font-size: 1.5rem;
+  }
 
   .contact-content {
     justify-content: center;
