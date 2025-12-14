@@ -19,7 +19,7 @@ a:focus,
 button:focus,
 input:focus,
 textarea:focus {
-  outline: 2px solid #474af0;
+  outline: 2px solid #333;
   outline-offset: 2px;
 }
 
@@ -127,7 +127,7 @@ header {
 
 .home-s {
   font-weight: bold;
-  color: green;
+  color: #666;
 }
 
 .info-home h1 {
@@ -222,7 +222,7 @@ hr {
 }
 
 .follow ul a:hover {
-  color: #474af0;
+  color: #555;
   transform: translateY(-3px);
 }
 
@@ -273,7 +273,7 @@ hr {
 
 .about .hrrr hr{
     width: 80px;
-    border: 2px solid #474af0;
+    border: 2px solid #333;
     border-radius: 2px;
 }
 
@@ -328,9 +328,9 @@ hr {
 }
 
 .c1:hover{
-    border-color: #474af0;
+    border-color: #555;
     transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(71, 74, 240, 0.15);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
 }
 
 .c1 h3{
@@ -342,7 +342,7 @@ hr {
 
 .c1 h3 i{
     margin-right: 10px;
-    color: #474af0;
+    color: #444;
     font-size: 1.5rem;
 }
 
@@ -354,8 +354,8 @@ hr {
 
 .c1:hover {
   transform: translateY(-5px);
-  border-color: #474af0;               
-  box-shadow: 0 5px 20px rgba(71, 74, 240, 0.15);  
+  border-color: #555;               
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);  
   cursor: pointer;                         
 }
 
@@ -423,7 +423,7 @@ hr {
 }
 
 .project-card h3 {
-  color: #1e40af;
+  color: #222;
   margin-bottom: 8px;
 }
 
@@ -439,8 +439,8 @@ hr {
 
 .skills a {
   display: inline-block;
-  background: #e0e7ff;
-  color: #1e3a8a;
+  background: #e8e8e8;
+  color: #333;
   text-decoration: none;
   font-size: 0.8rem;
   padding: 5px 10px;
@@ -460,7 +460,7 @@ hr {
 }
 
 .btn {
-  background: #1e40af;
+  background: #333;
   color: white;
   text-decoration: none;
   padding: 8px 14px;
@@ -473,7 +473,7 @@ hr {
 }
 
 .btn:hover {
-  background: #2563eb;
+  background: #555;
   border-radius: 25px;
 
 }
@@ -551,7 +551,7 @@ hr {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: #474af0;
+  background: #555;
   z-index: 0;
   transition: 0.5s;
 }
@@ -623,7 +623,7 @@ hr {
 
 .contact-item i {
   font-size: 20px;
-  color: #474af0;
+  color: #444;
 }
 
 .social-links {
@@ -684,11 +684,11 @@ hr {
 .contact-form input:focus,
 .contact-form textarea:focus {
   outline: none;
-  border-color: #474af0;
+  border-color: #555;
 }
 
 .btn-send {
-  background: #474af0;
+  background: #333;
   color: #fff;
   border: none;
   padding: 12px 25px;
@@ -746,7 +746,7 @@ hr {
 }
 
 .footer-links li a:hover {
-  color: #474af0;
+  color: #666;
 }
 
 .footer-social {
@@ -763,7 +763,7 @@ hr {
 }
 
 .footer-social a:hover {
-  color: #474af0;
+  color: #888;
 }
 
 .footer-copy {
