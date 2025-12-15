@@ -88,7 +88,7 @@ backToTop.style.cssText = `
   justify-content: center;
   cursor: pointer;
   z-index: 1000;
-  transition: all 0.3s ease;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 `;
 
 backToTop.addEventListener('click', () => {
