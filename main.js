@@ -38,6 +38,23 @@ window.addEventListener('scroll', () => {
     backToTop.style.display = "none";
   }
 
+  // Footer 영역에 도달하면 버튼 색상 반전
+  const footer = document.querySelector('.footer');
+  if (footer) {
+    const footerTop = footer.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+    
+    if (footerTop < windowHeight) {
+      backToTop.style.background = 'white';
+      backToTop.style.color = '#333333';
+      backToTop.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+    } else {
+      backToTop.style.background = '#333333';
+      backToTop.style.color = 'white';
+      backToTop.style.boxShadow = 'none';
+    }
+  }
+
   revealElements.forEach(el => {
     const windowHeight = window.innerHeight;
     const elementTop = el.getBoundingClientRect().top;
@@ -71,7 +88,7 @@ backToTop.style.cssText = `
   justify-content: center;
   cursor: pointer;
   z-index: 1000;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
 `;
 
 backToTop.addEventListener('click', () => {
