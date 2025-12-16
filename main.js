@@ -1,3 +1,26 @@
+// ==============================================
+// CONFIGURATION & CONSTANTS
+// ==============================================
+const CONFIG = {
+  EMAIL: 'dev@kalpha.kr',
+  TYPING_SPEED: 100,
+  SCROLL_OFFSET: 80,
+  SCROLL_REVEAL_POINT: 150,
+  BACK_TO_TOP_THRESHOLD: 500,
+  LOADING: {
+    TEXT_DELAY: 0,
+    ICON_DELAY: 800,
+    SUBICON_BASE_DELAY: 1600,
+    SUBICON_INCREMENT: 400,
+    DESIGNER_DELAY: 2800,
+    ANIMATION_DURATION: 900,  // fall animation duration
+    MIN_DISPLAY_TIME: 4500    // 2800 (last element) + 900 (animation) + 800 (viewing time)
+  }
+};
+
+// ==============================================
+// NAVIGATION
+// ==============================================
 const navLinks = document.querySelectorAll('.ul-list li a');
 const sections = document.querySelectorAll('section');
 
@@ -12,7 +35,7 @@ navLinks.forEach(link => {
     const targetSection = document.getElementById(targetId);
 
     window.scrollTo({
-      top: targetSection.offsetTop - 80, 
+      top: targetSection.offsetTop - CONFIG.SCROLL_OFFSET, 
       behavior: 'smooth'
     });
 
@@ -32,7 +55,7 @@ window.addEventListener('scroll', () => {
     }
   });
 
-  if(window.scrollY > 500){
+  if(window.scrollY > CONFIG.BACK_TO_TOP_THRESHOLD){
     backToTop.style.display = "flex";
   } else {
     backToTop.style.display = "none";
@@ -58,7 +81,7 @@ window.addEventListener('scroll', () => {
   revealElements.forEach(el => {
     const windowHeight = window.innerHeight;
     const elementTop = el.getBoundingClientRect().top;
-    const revealPoint = 150;
+    const revealPoint = CONFIG.SCROLL_REVEAL_POINT;
 
     if(elementTop < windowHeight - revealPoint){
       el.classList.add('active-reveal');
@@ -66,37 +89,25 @@ window.addEventListener('scroll', () => {
   });
 });
 
+// ==============================================
+// SCROLL REVEAL ANIMATIONS
+// ==============================================
 const revealElements = document.querySelectorAll('.home-container, .about-container, .projects-container, .services-container, .contact-content');
 revealElements.forEach(el => el.classList.add('reveal'));
 
-const backToTop = document.createElement('div');
-backToTop.innerHTML = '<i class="fa-solid fa-chevron-up"></i>';
-backToTop.id = "back-to-top";
-document.body.appendChild(backToTop);
+// ==============================================
+// BACK TO TOP BUTTON
+// ==============================================
+const backToTop = document.getElementById('back-to-top');
 
-backToTop.style.cssText = `
-  position: fixed;
-  bottom: 40px;
-  right: 40px;
-  background: #333333;
-  color: white;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 1000;
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-`;
+if (backToTop) {
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 
-backToTop.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-backToTop.addEventListener('mouseover', () => backToTop.style.transform = 'scale(1.2)');
-backToTop.addEventListener('mouseout', () => backToTop.style.transform = 'scale(1)');
+  backToTop.addEventListener('mouseover', () => backToTop.style.transform = 'scale(1.2)');
+  backToTop.addEventListener('mouseout', () => backToTop.style.transform = 'scale(1)');
+}
 
 const cards = document.querySelectorAll('.project-card, .c1, .service-card');
 cards.forEach(card => {
@@ -104,12 +115,15 @@ cards.forEach(card => {
   card.addEventListener('mouseleave', () => card.style.transform = 'translateY(0) scale(1)');
 });
 
+// ==============================================
+// TYPING EFFECT
+// ==============================================
 const typingElement = document.querySelector('.info-home h3'); 
 const words = ["Fullstack Developer", "Internal Network Hacking", "Server Hacking"];
 let wordIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
-let typingSpeed = 100;
+let typingSpeed = CONFIG.TYPING_SPEED;
 
 function type() {
     const currentWord = words[wordIndex];
@@ -137,17 +151,25 @@ document.addEventListener('DOMContentLoaded', type);
 // 버튼 기능 추가
 const hireBtn = document.querySelector('.btn-home1');
 
+// ==============================================
+// BUTTONS & ACTIONS
+// ==============================================
 if (hireBtn) {
   hireBtn.addEventListener('click', () => {
-    window.location.href = 'mailto:dev@kalpha.kr?subject=프리랜서 작업 문의';
+    window.location.href = `mailto:${CONFIG.EMAIL}?subject=프리랜서 작업 문의`;
   });
 }
 
-// 모바일 네비게이션
+// ==============================================
+// MOBILE NAVIGATION
+// ==============================================
 const mobileMenuBtn = document.createElement('div');
 mobileMenuBtn.className = 'mobile-menu-btn';
 mobileMenuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
-document.querySelector('.header-list').prepend(mobileMenuBtn);
+const headerList = document.querySelector('.header-list');
+if (headerList) {
+  headerList.prepend(mobileMenuBtn);
+}
 
 mobileMenuBtn.addEventListener('click', () => {
   document.querySelector('.ul-list').classList.toggle('mobile-active');
@@ -156,31 +178,57 @@ mobileMenuBtn.addEventListener('click', () => {
   icon.classList.toggle('fa-times');
 });
 
+// ==============================================
+// LOADING SCREEN
+// ==============================================
 document.addEventListener("DOMContentLoaded", () => {
   const loadingText = document.getElementById("loading-text");
   const mainIcon = document.querySelector(".main-icon");
   const subIcons = document.querySelectorAll(".sub-icons i");
   const designerText = document.getElementById("designer-text");
-  const mainPage = document.getElementById("main-page");
   const loadingScreen = document.getElementById("loading-screen");
+  const startTime = Date.now();
+  
+  // Prevent scrolling during loading
+  document.body.classList.add('loading');
 
   function showElement(element, delay=0){
+    if (!element) return;
     setTimeout(() => {
       element.classList.remove("hidden");
       element.classList.add("fall");
     }, delay);
   }
 
-  showElement(loadingText, 0);          
-  showElement(mainIcon, 800);         
+  // Show loading elements with configured delays
+  showElement(loadingText, CONFIG.LOADING.TEXT_DELAY);          
+  showElement(mainIcon, CONFIG.LOADING.ICON_DELAY);         
   subIcons.forEach((icon, idx) => {
-    showElement(icon, 1600 + idx*400);  
+    showElement(icon, CONFIG.LOADING.SUBICON_BASE_DELAY + idx * CONFIG.LOADING.SUBICON_INCREMENT);  
   });
-  showElement(designerText, 2800);    
+  showElement(designerText, CONFIG.LOADING.DESIGNER_DELAY);    
 
-  setTimeout(() => {
-    loadingScreen.style.opacity = '0';
-    setTimeout(() => loadingScreen.style.display='none', 500);
-    mainPage.classList.add("visible");
-  }, 4000);
+  // Hide loading screen after minimum display time and content is ready
+  function hideLoadingScreen() {
+    const elapsed = Date.now() - startTime;
+    const remainingTime = Math.max(0, CONFIG.LOADING.MIN_DISPLAY_TIME - elapsed);
+    
+    setTimeout(() => {
+      if (loadingScreen) {
+        loadingScreen.style.opacity = '0';
+        setTimeout(() => {
+          loadingScreen.style.display = 'none';
+          // Re-enable scrolling
+          document.body.classList.remove('loading');
+        }, 500);
+      }
+    }, remainingTime);
+  }
+
+  // Wait for critical resources
+  if (document.readyState === 'complete') {
+    hideLoadingScreen();
+  } else {
+    window.addEventListener('load', hideLoadingScreen);
+  }
 });

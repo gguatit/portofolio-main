@@ -23,7 +23,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Unbounded:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Optimized: Reduced font families for better performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&family=Open+Sans:wght@600;700&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <!-- JSON-LD 구조화된 데이터 -->
@@ -58,6 +59,9 @@
     </script>
 </head>
 <body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#home" class="skip-to-content">본문으로 건너뛰기</a>
+    
     <div id="loading-screen">
   <div class="loading-content">
     <i class="fa-solid fa-laptop-code fa-5x main-icon hidden"></i>
@@ -75,18 +79,18 @@
 </div>
     <header class="header-list">
         <div class="div-list ">
-            <ul class="ul-list">
+            <ul class="ul-list" role="navigation" aria-label="메인 네비게이션">
                 <li class="active">
-                    <i class="fa-regular fa-house"></i>
-                    <a href="#home">홈</a>
+                    <i class="fa-regular fa-house" aria-hidden="true"></i>
+                    <a href="#home" aria-label="홈 섹션으로 이동">홈</a>
                 </li>
                 <li>
-                    <i class="fa-regular fa-address-card"></i>
-                    <a href="#about">소개</a>
+                    <i class="fa-regular fa-address-card" aria-hidden="true"></i>
+                    <a href="#about" aria-label="소개 섹션으로 이동">소개</a>
                 </li>
                 <li>
-                    <i class="fa-regular fa-folder-open"></i>
-                    <a href="#project">프로젝트</a>
+                    <i class="fa-regular fa-folder-open" aria-hidden="true"></i>
+                    <a href="#project" aria-label="프로젝트 섹션으로 이동">프로젝트</a>
                 </li>
             </ul>
         </div>
@@ -178,7 +182,7 @@
         <div class="projects-container">
 
     <div class="project-card">
-      <img src="images/main.png" alt="포트폴리오 웹사이트">
+      <img src="images/main.png" alt="Kalpha_Dev 개인 포트폴리오 웹사이트 메인 화면 스크린샷" loading="lazy">
       <h3>포트폴리오 웹사이트</h3>
       <p>디자인 및 코딩 프로젝트를 선보이는 개인 포트폴리오.</p>
       <div class="skills">
@@ -193,7 +197,7 @@
     </div>
 
     <div class="project-card">
-      <img src="images/익명채팅.png" alt="익명채팅 앱">
+      <img src="images/익명채팅.png" alt="실시간 익명 채팅 애플리케이션 인터페이스 스크린샷" loading="lazy">
       <h3>익명채팅 앱</h3>
       <p>완전 익명 실시간 채팅 애플리케이션.</p>
       <div class="skills">
@@ -224,6 +228,12 @@
   </div>
 </footer>
 
+      <!-- Back to top button -->
+      <button id="back-to-top" aria-label="페이지 상단으로 이동">
+        <i class="fa-solid fa-chevron-up"></i>
+      </button>
+
+      <div id="main-page" style="display: none;"></div>
       <script src="main.js"></script>
 </body>
 </html>
