@@ -2,9 +2,7 @@
 
 > 풀스택 개발자 및 보안 전문가의 개인 포트폴리오 웹사이트
 
-[![Live Demo](https://img.shields.io/badge/demo-live-success?style=flat-square)](https://gguatit.github.io/portofolio-main)
-[![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/gguatit/portofolio-main?style=flat-square)](https://github.com/gguatit/portofolio-main/stargazers)
+[![Live Demo](https://img.shields.io/badge/demo-live-success?style=flat-square)](https://gguatit.github.io/portofolio-main) [![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE) [![GitHub Stars](https://img.shields.io/github/stars/gguatit/portofolio-main?style=flat-square)](https://github.com/gguatit/portofolio-main/stargazers)
 
 ## 소개
 
