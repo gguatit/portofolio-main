@@ -116,7 +116,7 @@ npx http-server -p 8000
 - **개발자**: Kalpha_Dev
 - **이메일**: dev@kalpha.kr
 - **GitHub**: [@gguatit](https://github.com/gguatit)
-- **웹사이트**: [https://gguatit.github.io/portofolio-main](https://gguatit.github.io/portofolio-main)
+- **웹사이트**: [https://kalpha.kr](https://kalpha.kr)
 
 ## 기여
 
