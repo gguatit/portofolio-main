@@ -6,16 +6,7 @@ const CONFIG = {
   TYPING_SPEED: 100,
   SCROLL_OFFSET: 80,
   SCROLL_REVEAL_POINT: 150,
-  BACK_TO_TOP_THRESHOLD: 500,
-  LOADING: {
-    TEXT_DELAY: 0,
-    ICON_DELAY: 800,
-    SUBICON_BASE_DELAY: 1600,
-    SUBICON_INCREMENT: 400,
-    DESIGNER_DELAY: 2800,
-    ANIMATION_DURATION: 900,  // fall animation duration
-    MIN_DISPLAY_TIME: 4500    // 2800 (last element) + 900 (animation) + 800 (viewing time)
-  }
+  BACK_TO_TOP_THRESHOLD: 500
 };
 
 // ==============================================
@@ -35,7 +26,7 @@ navLinks.forEach(link => {
     const targetSection = document.getElementById(targetId);
 
     window.scrollTo({
-      top: targetSection.offsetTop - CONFIG.SCROLL_OFFSET, 
+      top: targetSection.offsetTop - CONFIG.SCROLL_OFFSET,
       behavior: 'smooth'
     });
 
@@ -55,7 +46,7 @@ window.addEventListener('scroll', () => {
     }
   });
 
-  if(window.scrollY > CONFIG.BACK_TO_TOP_THRESHOLD){
+  if (window.scrollY > CONFIG.BACK_TO_TOP_THRESHOLD) {
     backToTop.style.display = "flex";
   } else {
     backToTop.style.display = "none";
@@ -66,7 +57,7 @@ window.addEventListener('scroll', () => {
   if (footer) {
     const footerTop = footer.getBoundingClientRect().top;
     const windowHeight = window.innerHeight;
-    
+
     if (footerTop < windowHeight) {
       backToTop.style.background = 'white';
       backToTop.style.color = '#333333';
@@ -77,23 +68,7 @@ window.addEventListener('scroll', () => {
       backToTop.style.boxShadow = 'none';
     }
   }
-
-  revealElements.forEach(el => {
-    const windowHeight = window.innerHeight;
-    const elementTop = el.getBoundingClientRect().top;
-    const revealPoint = CONFIG.SCROLL_REVEAL_POINT;
-
-    if(elementTop < windowHeight - revealPoint){
-      el.classList.add('active-reveal');
-    }
-  });
 });
-
-// ==============================================
-// SCROLL REVEAL ANIMATIONS
-// ==============================================
-const revealElements = document.querySelectorAll('.home-container, .about-container, .projects-container, .services-container, .contact-content');
-revealElements.forEach(el => el.classList.add('reveal'));
 
 // ==============================================
 // BACK TO TOP BUTTON
@@ -114,39 +89,6 @@ cards.forEach(card => {
   card.addEventListener('mouseenter', () => card.style.transform = 'translateY(-8px) scale(1.05)');
   card.addEventListener('mouseleave', () => card.style.transform = 'translateY(0) scale(1)');
 });
-
-// ==============================================
-// TYPING EFFECT
-// ==============================================
-const typingElement = document.querySelector('.info-home h3'); 
-const words = ["Fullstack Developer", "Internal Network Hacking", "Server Hacking"];
-let wordIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-let typingSpeed = CONFIG.TYPING_SPEED;
-
-function type() {
-    const currentWord = words[wordIndex];
-    let displayedText = currentWord.substring(0, charIndex);
-    
-    typingElement.innerHTML = displayedText + '<span class="cursor">|</span>';
-
-    if (!isDeleting && charIndex < currentWord.length) {
-        charIndex++;
-        setTimeout(type, typingSpeed);
-    } else if (isDeleting && charIndex > 0) {
-        charIndex--;
-        setTimeout(type, typingSpeed / 2);
-    } else {
-        isDeleting = !isDeleting;
-        if (!isDeleting) {
-            wordIndex = (wordIndex + 1) % words.length;
-        }
-        setTimeout(type, 1000);
-    }
-}
-
-document.addEventListener('DOMContentLoaded', type);
 
 // 버튼 기능 추가
 const hireBtn = document.querySelector('.btn-home1');
@@ -179,56 +121,9 @@ mobileMenuBtn.addEventListener('click', () => {
 });
 
 // ==============================================
-// LOADING SCREEN
+// INITIALIZATION
 // ==============================================
 document.addEventListener("DOMContentLoaded", () => {
-  const loadingText = document.getElementById("loading-text");
-  const mainIcon = document.querySelector(".main-icon");
-  const subIcons = document.querySelectorAll(".sub-icons i");
-  const designerText = document.getElementById("designer-text");
-  const loadingScreen = document.getElementById("loading-screen");
-  const startTime = Date.now();
-  
-  // Prevent scrolling during loading
-  document.body.classList.add('loading');
-
-  function showElement(element, delay=0){
-    if (!element) return;
-    setTimeout(() => {
-      element.classList.remove("hidden");
-      element.classList.add("fall");
-    }, delay);
-  }
-
-  // Show loading elements with configured delays
-  showElement(loadingText, CONFIG.LOADING.TEXT_DELAY);          
-  showElement(mainIcon, CONFIG.LOADING.ICON_DELAY);         
-  subIcons.forEach((icon, idx) => {
-    showElement(icon, CONFIG.LOADING.SUBICON_BASE_DELAY + idx * CONFIG.LOADING.SUBICON_INCREMENT);  
-  });
-  showElement(designerText, CONFIG.LOADING.DESIGNER_DELAY);    
-
-  // Hide loading screen after minimum display time and content is ready
-  function hideLoadingScreen() {
-    const elapsed = Date.now() - startTime;
-    const remainingTime = Math.max(0, CONFIG.LOADING.MIN_DISPLAY_TIME - elapsed);
-    
-    setTimeout(() => {
-      if (loadingScreen) {
-        loadingScreen.style.opacity = '0';
-        setTimeout(() => {
-          loadingScreen.style.display = 'none';
-          // Re-enable scrolling
-          document.body.classList.remove('loading');
-        }, 500);
-      }
-    }, remainingTime);
-  }
-
-  // Wait for critical resources
-  if (document.readyState === 'complete') {
-    hideLoadingScreen();
-  } else {
-    window.addEventListener('load', hideLoadingScreen);
-  }
+  // Re-enable scrolling (if it was somehow disabled)
+  document.body.classList.remove('loading');
 });

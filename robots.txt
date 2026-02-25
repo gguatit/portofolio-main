@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gguatit.github.io/portofolio-main/sitemap.xml
