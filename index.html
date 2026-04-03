@@ -1,72 +1,130 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kalpha_Dev - 풀스택 개발자 & 보안 전문가</title>
-  <meta name="description" content="Kalpha_Dev의 프로젝트 중심 포트폴리오">
+  <title>Kalpha_Dev - Portfolio</title>
+  <meta name="description" content="Kalpha Dev - 포트폴리오">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/jpeg" href="images/kalpha_kr.jpg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@600&family=Open+Sans:wght@700&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" />
 </head>
-
 <body>
-  <!-- Skip to main content for accessibility -->
-  <a href="#project" class="skip-to-content">본문으로 건너뛰기</a>
-
-
-  <header class="header-list">
-    <div class="div-list ">
-      <ul class="ul-list" role="navigation" aria-label="메인 네비게이션">
-        <li class="active">
-          <i class="fa-regular fa-folder-open" aria-hidden="true"></i>
-          <a href="#project" aria-label="프로젝트 섹션으로 이동">주요 작업</a>
-        </li>
-      </ul>
+  <a href="#main-content" class="sr-only">본문으로 건너뛰기</a>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">Kalpha_Dev</a>
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
   </header>
 
-  <section class="project" id="project">
-    <p class="section-label">프로젝트</p>
-    <h1>주요 작업</h1>
-    <hr>
-    <div class="info-pro">
-      <p>풀스택 개발, 최신 프레임워크, 창의적인 문제 해결 </p>
-      <p>전문성을 보여주는 최근 프로젝트 모음입니다.</p>
-    </div>
-    <p class="github-sync-notice">GitHub에서 최신 리포지토리와 언어 정보를 자동으로 불러옵니다.</p>
-    <div class="projects-container" id="github-projects" data-github-user="gguatit" data-repo-limit="6">
-      <p class="github-loading">GitHub 저장소를 불러오는 중...</p>
-    </div>
-  </section>
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+      <div class="container">
+        <h1 class="hero-title">배움을 즐기는 <br>학생 개발자</h1>
+        <p class="hero-desc">호기심을 가지고 새로운 기술을 탐구하는 것을 좋아합니다. 아직 모르는 것이 많지만, 기본기를 탄탄히 다지며 매일 조금씩 성장해 나가는 과정 자체를 즐기고 있습니다. 끊임없이 질문하고 답을 찾아가는 개발자가 되고 싶습니다.</p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">프로젝트 완성작 보기</a>
+          <a href="https://github.com/gguatit" target="_blank" class="btn btn-outline"><i class="fa-brands fa-github"></i> GitHub 프로필</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="container sub-container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+          <p>저는 항상 <strong>"이 코드는 왜 이렇게 동작할까?"</strong>라는 질문을 던지며 원리를 이해하려고 노력합니다. 화려한 기술보다는 이유 있는 코드 작성을 지향하며, 학업과 개인 프로젝트를 통해 배운 지식을 적용해보며 열심히 기본기를 다져가고 있습니다.</p>
+          <p>뛰어난 동료나 선배 개발자분들의 피드백을 스펀지처럼 흡수하고, 배운 것을 기록으로 남기며 꾸준하게 나아가는 것을 좋아합니다. 또한, <strong>AI 코딩 어시스턴트 등 최신 AI 도구를 적극적으로 활용</strong>하여 문제 해결 속도를 높이고 새로운 기술을 빠르게 습득하고 있습니다.</p>
+          <ul class="about-info">
+            <li><span>이메일</span> dev@kalpha.kr</li>
+            <li><span>관심 분야</span> Web Development, Information Security, Backend Basics</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+      <div class="container">
+        <h2 class="section-title">Tech Stack</h2>
+        <div class="skills-grid">
+          <div class="skill-group">
+            <h3>Frontend</h3>
+            <ul class="skill-list">
+              <li>JavaScript (ES6+) & TypeScript</li>
+              <li>Next.js</li>
+              <li>HTML5, CSS3, Tailwind CSS</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3>Backend</h3>
+            <ul class="skill-list">
+              <li>Node.js (Express, NestJS)</li>
+              <li>Java</li>
+              <li>Python</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3>Database / DevOps</h3>
+            <ul class="skill-list">
+              <li>MySQL, PostgreSQL</li>
+              <li>Docker & Cloudflare</li>
+              <li>Git</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3>Security</h3>
+            <ul class="skill-list">
+              <li>Web Penetration Testing</li>
+              <li>OWASP Top 10 대응</li>
+              <li>Secure Coding & Cryptography</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+      <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-desc">GitHub와 연동되어 실시간으로 불러오는 최신 오픈소스 리포지토리 목록입니다.</p>
+        
+        <!-- GitHub API Target Container -->
+        <div class="projects-container" id="github-projects" data-github-user="gguatit" data-repo-limit="6">
+          <div class="github-loading">GitHub 저장소를 불러오는 중...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+      <div class="container text-center sub-container">
+        <h2 class="section-title">Contact</h2>
+        <p>실현 가능한 서비스를 직접 만들어보며 현업의 경험을 간접적으로라도 배우고 싶습니다.<br>성장하는 학생 개발자에게 남겨주시는 소중한 조언이나 커피챗, 인턴십 제안 등을 언제나 환영합니다.</p>
+        <a href="mailto:dev@kalpha.kr" class="btn btn-primary mt-4">dev@kalpha.kr 로 연락하기</a>
+      </div>
+    </section>
+  </main>
+
   <footer class="footer">
-    <div class="footer-container">
-      <h2 class="footer-logo">Kalpha_Dev</h2>
-      <ul class="footer-links">
-        <li><a href="#project">주요 작업</a></li>
-      </ul>
-      <div class="footer-social">
+    <div class="container footer-inner">
+      <p>&copy; 2025 Kalpha_Dev. All rights reserved.</p>
+      <div class="footer-links">
         <a href="https://github.com/gguatit" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
       </div>
-      <p class="footer-copy">&copy; 2025 Kalpha_Dev. 모든 권리 보유.</p>
     </div>
   </footer>
 
-  <!-- Back to top button -->
-  <button id="back-to-top" aria-label="페이지 상단으로 이동">
-    <i class="fa-solid fa-chevron-up"></i>
-  </button>
-
-
   <script src="main.js"></script>
 </body>
-
 </html>
