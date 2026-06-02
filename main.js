@@ -5,7 +5,8 @@ const CONFIG = {
   EMAIL: 'dev@kalpha.kr',
   GITHUB_USERNAME: 'gguatit',
   GITHUB_REPO_LIMIT: 6,
-  GITHUB_API_BASE: 'https://api.github.com'
+  GITHUB_API_BASE: 'https://api.github.com',
+  GITHUB_PINNED_API: 'https://gh-pinned-repos-tsj7ta5xfhep.deno.dev'
 };
 
 // ==============================================
@@ -101,33 +102,60 @@ async function fetchRepositoryLanguages(languagesUrl) {
   }
 }
 
+async function fetchRepoDetails(owner, repo) {
+  const url = `${CONFIG.GITHUB_API_BASE}/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
+  const response = await fetch(url, { headers: { Accept: 'application/vnd.github+json' } });
+  if (!response.ok) return null;
+  return response.json();
+}
+
+async function loadPinnedRepositories(username) {
+  const pinnedUrl = `${CONFIG.GITHUB_PINNED_API}/?username=${encodeURIComponent(username)}`;
+  const response = await fetch(pinnedUrl);
+  if (!response.ok) return null;
+  const data = await response.json();
+  return data.length ? data : null;
+}
+
+async function loadRepositoriesFallback(username) {
+  const repoLimit = CONFIG.GITHUB_REPO_LIMIT;
+  const url = `${CONFIG.GITHUB_API_BASE}/users/${encodeURIComponent(username)}/repos?sort=updated&per_page=${repoLimit}&type=owner`;
+  const response = await fetch(url, { headers: { Accept: 'application/vnd.github+json' } });
+  if (!response.ok) {
+    if (response.status === 403) throw new Error('GitHub API 호출 한도 초과');
+    throw new Error(`요청 실패 (${response.status})`);
+  }
+  const repos = await response.json();
+  return repos.filter(r => !r.fork);
+}
+
 async function loadGithubRepositories() {
   if (!githubProjectsContainer) return;
 
   const username = githubProjectsContainer.dataset.githubUser || CONFIG.GITHUB_USERNAME;
-  const repoLimit = CONFIG.GITHUB_REPO_LIMIT;
-
   renderGithubState('GitHub 저장소를 불러오는 중...', 'github-loading');
 
-  const repositoriesUrl = `${CONFIG.GITHUB_API_BASE}/users/${encodeURIComponent(username)}/repos?sort=updated&per_page=${repoLimit}&type=owner`;
-
   try {
-    const response = await fetch(repositoriesUrl, { headers: { Accept: 'application/vnd.github+json' } });
-    if (!response.ok) {
-      if (response.status === 403) throw new Error('GitHub API 호출 한도 초과');
-      throw new Error(`요청 실패 (${response.status})`);
+    let repositories;
+
+    const pinnedRepos = await loadPinnedRepositories(username);
+
+    if (pinnedRepos) {
+      const details = await Promise.all(
+        pinnedRepos.map(pinned => fetchRepoDetails(pinned.owner, pinned.repo))
+      );
+      repositories = details.filter(Boolean);
+    } else {
+      repositories = await loadRepositoriesFallback(username);
     }
 
-    const repositories = await response.json();
-    const visibleRepositories = repositories.filter(repository => !repository.fork);
-
-    if (!visibleRepositories.length) {
+    if (!repositories.length) {
       renderGithubState('표시할 저장소가 없습니다.', 'github-empty');
       return;
     }
 
     const repositoryCards = await Promise.all(
-      visibleRepositories.map(async repository => {
+      repositories.map(async repository => {
         const fetchedLanguages = await fetchRepositoryLanguages(repository.languages_url);
         const languages = fetchedLanguages.length ? fetchedLanguages : (repository.language ? [repository.language] : []);
         return createRepositoryCard(repository, languages);
