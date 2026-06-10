@@ -34,17 +34,17 @@ function renderGithubState(message, className) {
 }
 
 function createLanguageTags(languages) {
-  const skillsElement = document.createElement('div');
-  skillsElement.className = 'skills';
-  if (!languages.length) return skillsElement;
+  const tagsEl = document.createElement('div');
+  tagsEl.className = 'repo-tags';
+  if (!languages.length) return tagsEl;
 
   languages.forEach(language => {
     const languageTag = document.createElement('span');
     languageTag.className = 'skill-tag';
     languageTag.textContent = language;
-    skillsElement.appendChild(languageTag);
+    tagsEl.appendChild(languageTag);
   });
-  return skillsElement;
+  return tagsEl;
 }
 
 function createRepositoryCard(repository, languages) {
@@ -59,7 +59,8 @@ function createRepositoryCard(repository, languages) {
 
   const metadata = document.createElement('p');
   metadata.className = 'repo-meta';
-  metadata.textContent = `⭐ ${formatNumber(repository.stargazers_count)} · 업데이트 ${formatUpdatedDate(repository.updated_at)}`;
+  const updatedStr = repository.updated_at ? `업데이트 ${formatUpdatedDate(repository.updated_at)}` : 'Pinned';
+  metadata.textContent = `⭐ ${formatNumber(repository.stargazers_count)} · ${updatedStr}`;
 
   const actions = document.createElement('div');
   actions.className = 'btns';
@@ -129,6 +130,18 @@ async function loadRepositoriesFallback(username) {
   return repos.filter(r => !r.fork);
 }
 
+function pinnedToCardData(pinned) {
+  return {
+    name: pinned.repo,
+    description: pinned.description || '설명이 없습니다.',
+    html_url: pinned.link,
+    homepage: pinned.website || '',
+    stargazers_count: pinned.stars || 0,
+    language: pinned.language || null,
+    updated_at: null
+  };
+}
+
 async function loadGithubRepositories() {
   if (!githubProjectsContainer) return;
 
@@ -136,18 +149,22 @@ async function loadGithubRepositories() {
   renderGithubState('GitHub 저장소를 불러오는 중...', 'github-loading');
 
   try {
-    let repositories;
-
     const pinnedRepos = await loadPinnedRepositories(username);
 
     if (pinnedRepos) {
-      const details = await Promise.all(
-        pinnedRepos.map(pinned => fetchRepoDetails(pinned.owner, pinned.repo))
-      );
-      repositories = details.filter(Boolean);
-    } else {
-      repositories = await loadRepositoriesFallback(username);
+      const cards = pinnedRepos.map(pinned => {
+        const repo = pinnedToCardData(pinned);
+        const languages = repo.language ? [repo.language] : [];
+        return createRepositoryCard(repo, languages);
+      });
+
+      githubProjectsContainer.innerHTML = '';
+      cards.forEach(card => githubProjectsContainer.appendChild(card));
+      setupCardTilt();
+      return;
     }
+
+    const repositories = await loadRepositoriesFallback(username);
 
     if (!repositories.length) {
       renderGithubState('표시할 저장소가 없습니다.', 'github-empty');
@@ -164,6 +181,7 @@ async function loadGithubRepositories() {
 
     githubProjectsContainer.innerHTML = '';
     repositoryCards.forEach(card => githubProjectsContainer.appendChild(card));
+    setupCardTilt();
   } catch (error) {
     console.error('GitHub 저장소 조회 실패:', error);
     renderGithubState(`GitHub 정보를 불러오지 못했습니다. (${error.message})`, 'github-error');
@@ -171,11 +189,113 @@ async function loadGithubRepositories() {
 }
 
 // ==============================================
-// NAVIGATION & SCROLL 
+// SCROLL REVEAL
 // ==============================================
-document.addEventListener("DOMContentLoaded", () => {
-  loadGithubRepositories();
+function setupScrollReveal() {
+  const revealEls = document.querySelectorAll('.reveal, .reveal-up');
 
+  if (!revealEls.length) return;
+
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('revealed'));
+  }
+}
+
+// ==============================================
+// CARD MOUSE TILT
+// ==============================================
+function setupCardTilt() {
+  if (!window.matchMedia('(hover: hover)').matches) return;
+
+  const cards = document.querySelectorAll('.github-project-card');
+
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
+      const rotateX = ((y - cy) / cy) * -6;
+      const rotateY = ((x - cx) / cx) * 6;
+      const mx = (x / rect.width) * 100;
+      const my = (y / rect.height) * 100;
+
+      card.style.setProperty('--mx', `${mx}%`);
+      card.style.setProperty('--my', `${my}%`);
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-3px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+      card.style.setProperty('--mx', '50%');
+      card.style.setProperty('--my', '50%');
+    });
+  });
+}
+
+// ==============================================
+// PROGRESS BAR
+// ==============================================
+function setupProgressBar() {
+  const progressBar = document.querySelector('.progress-bar');
+  if (!progressBar) return;
+
+  function update() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = `${Math.min(scrolled, 100)}%`;
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => { update(); ticking = false; });
+      ticking = true;
+    }
+  });
+  update();
+}
+
+// ==============================================
+// LIVE CLOCK (KST)
+// ==============================================
+function setupLiveClock() {
+  const clock = document.querySelector('.live-clock');
+  if (!clock) return;
+
+  function update() {
+    const now = new Date();
+    const kst = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Seoul' }));
+    const hh = String(kst.getHours()).padStart(2, '0');
+    const mm = String(kst.getMinutes()).padStart(2, '0');
+    const ss = String(kst.getSeconds()).padStart(2, '0');
+    clock.textContent = `KST ${hh}:${mm}:${ss}`;
+  }
+
+  update();
+  setInterval(update, 1000);
+}
+
+// ==============================================
+// NAVIGATION SMOOTH SCROLL
+// ==============================================
+function setupNavScroll() {
   const navLinks = document.querySelectorAll('.nav a');
   const headerOffset = 80;
 
@@ -186,12 +306,20 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         const targetSection = document.querySelector(targetId);
         if (targetSection) {
-          window.scrollTo({
-            top: targetSection.offsetTop - headerOffset,
-            behavior: 'smooth'
-          });
+          window.scrollTo({ top: targetSection.offsetTop - headerOffset, behavior: 'smooth' });
         }
       }
     });
   });
+}
+
+// ==============================================
+// BOOT
+// ==============================================
+document.addEventListener('DOMContentLoaded', () => {
+  setupScrollReveal();
+  setupProgressBar();
+  setupLiveClock();
+  setupNavScroll();
+  loadGithubRepositories();
 });
