@@ -9,6 +9,9 @@
   <link rel="icon" type="image/jpeg" href="images/kalpha_kr.jpg">
   <link href="https://fonts.googleapis.com/css2?family=Gugi&family=IBM+Plex+Sans+KR:wght@300;400;500;700&family=Nanum+Gothic+Coding:wght@400;700&family=Yeon+Sung&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="progress-bar"></div>
@@ -20,6 +23,7 @@
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
+        <a href="#journey">Journey</a>
         <a href="#demo">Demo</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -29,10 +33,11 @@
   <main id="main-content">
     <!-- Hero Section -->
     <section id="hero" class="hero">
+      <div class="hero-orb"></div>
       <div class="container">
-        <h1 class="hero-title reveal-up" style="--reveal-delay: 0ms">배움을 즐기는 <br>학생 개발자</h1>
-        <p class="hero-desc reveal-up" style="--reveal-delay: 120ms">호기심을 가지고 새로운 기술을 탐구하는 것을 좋아합니다. 아직 모르는 것이 많지만, 기본기를 탄탄히 다지며 매일 조금씩 성장해 나가는 과정 자체를 즐기고 있습니다. 끊임없이 질문하고 답을 찾아가는 개발자가 되고 싶습니다.</p>
-        <div class="hero-actions reveal-up" style="--reveal-delay: 240ms">
+        <h1 class="hero-title">배움을 즐기는 <br>학생 개발자</h1>
+        <p class="hero-desc">호기심을 가지고 새로운 기술을 탐구하는 것을 좋아합니다. 아직 모르는 것이 많지만, 기본기를 탄탄히 다지며 매일 조금씩 성장해 나가는 과정 자체를 즐기고 있습니다. 끊임없이 질문하고 답을 찾아가는 개발자가 되고 싶습니다.</p>
+        <div class="hero-actions">
           <a href="#projects" class="btn btn-primary">프로젝트 완성작 보기</a>
           <a href="https://github.com/gguatit" target="_blank" class="btn btn-outline"><i class="fa-brands fa-github"></i> GitHub 프로필</a>
         </div>
@@ -43,7 +48,7 @@
     <section id="about" class="about">
       <div class="container sub-container">
         <h2 class="section-title"><span class="section-num">01</span>About Me</h2>
-        <div class="about-content reveal">
+        <div class="about-content">
           <p>저는 항상 <strong>"이 코드는 왜 이렇게 동작할까?"</strong>라는 질문을 던지며 원리를 이해하려고 노력합니다. 화려한 기술보다는 이유 있는 코드 작성을 지향하며, 학업과 개인 프로젝트를 통해 배운 지식을 적용해보며 열심히 기본기를 다져가고 있습니다.</p>
           <p>뛰어난 동료나 선배 개발자분들의 피드백을 스펀지처럼 흡수하고, 배운 것을 기록으로 남기며 꾸준하게 나아가는 것을 좋아합니다. 또한, <strong>AI 코딩 어시스턴트 등 최신 AI 도구를 적극적으로 활용</strong>하여 문제 해결 속도를 높이고 새로운 기술을 빠르게 습득하고 있습니다.</p>
           <ul class="about-info">
@@ -58,7 +63,7 @@
     <section id="skills" class="skills">
       <div class="container">
         <h2 class="section-title"><span class="section-num">02</span>Tech Stack</h2>
-        <div class="skills-grid reveal">
+        <div class="skills-grid">
           <div class="skill-group">
             <h3>Frontend</h3>
             <ul class="skill-list">
@@ -99,7 +104,7 @@
     <section id="projects" class="projects">
       <div class="container">
         <h2 class="section-title"><span class="section-num">03</span>Featured Projects</h2>
-        <p class="section-desc reveal-up" style="--reveal-delay: 60ms">GitHub 프로필의 Pinned 저장소와 연동되어 실시간으로 불러오는 리포지토리 목록입니다.</p>
+        <p class="section-desc">GitHub 프로필의 Pinned 저장소와 연동되어 실시간으로 불러오는 리포지토리 목록입니다.</p>
         
         <!-- GitHub API Target Container -->
         <div class="projects-container" id="github-projects" data-github-user="gguatit" data-repo-limit="6">
@@ -112,17 +117,51 @@
     <section id="contact" class="contact">
       <div class="container text-center sub-container">
         <h2 class="section-title"><span class="section-num">04</span>Contact</h2>
-        <p class="reveal">실현 가능한 서비스를 직접 만들어보며 현업의 경험을 간접적으로라도 배우고 싶습니다.<br>성장하는 학생 개발자에게 남겨주시는 소중한 조언이나 커피챗, 인턴십 제안 등을 언제나 환영합니다.</p>
-        <a href="mailto:dev@kalpha.kr" class="btn btn-primary mt-4 reveal-up" style="--reveal-delay: 100ms">dev@kalpha.kr 로 연락하기</a>
+        <p>실현 가능한 서비스를 직접 만들어보며 현업의 경험을 간접적으로라도 배우고 싶습니다.<br>성장하는 학생 개발자에게 남겨주시는 소중한 조언이나 커피챗, 인턴십 제안 등을 언제나 환영합니다.</p>
+        <a href="mailto:dev@kalpha.kr" class="btn btn-primary mt-4">dev@kalpha.kr 로 연락하기</a>
+      </div>
+    </section>
+
+    <!-- Journey Section -->
+    <section id="journey" class="journey">
+      <div class="container">
+        <h2 class="section-title"><span class="section-num">05</span>Journey</h2>
+        <p class="section-desc">배움과 성장의 여정 — 지금까지 걸어온 길</p>
+        <div class="journey-timeline">
+          <div class="journey-item">
+            <div class="journey-dot"></div>
+            <div class="journey-card">
+              <span class="journey-date">2026 — Present</span>
+              <h3>Korea IT School</h3>
+              <p>앱 및 웹 개발 과정 수료 중. 백엔드 와 프론트를 함께 배우며, 실무형 팀 프로젝트에 참여하고 있습니다.</p>
+            </div>
+          </div>
+          <div class="journey-item">
+            <div class="journey-dot"></div>
+            <div class="journey-card">
+              <span class="journey-date">2023 — 2025</span>
+              <h3>독학과 실험</h3>
+              <p>JavaScript부터 Node.js, Python까지 다양한 스택을 스스로 탐구. 작은 프로젝트를 만들고 부수고 다시 만들며 배우는 과정을 반복했습니다.</p>
+            </div>
+          </div>
+          <div class="journey-item">
+            <div class="journey-dot"></div>
+            <div class="journey-card">
+              <span class="journey-date">2022</span>
+              <h3>코딩과의 첫 만남</h3>
+              <p>HTML과 CSS로 간단한 웹 페이지를 만들면서 처음으로 "만드는 즐거움"을 느꼈습니다. 버튼 하나가 동작할 때의 그 느낌을 아직도 기억합니다.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Demo Section -->
     <section id="demo" class="demo">
       <div class="container">
-        <h2 class="section-title"><span class="section-num">05</span>Live Demo</h2>
-        <p class="section-desc reveal-up" style="--reveal-delay: 60ms">kalpha.mmv.kr — Cloudflare Workers 기반 실서비스</p>
-        <div class="browser-frame reveal-up" style="--reveal-delay: 120ms">
+        <h2 class="section-title"><span class="section-num">06</span>Live Demo</h2>
+        <p class="section-desc">kalpha.mmv.kr — Cloudflare Workers 기반 실서비스</p>
+        <div class="browser-frame">
           <div class="browser-toolbar">
             <div class="traffic-lights">
               <span class="light light-red"></span>
@@ -152,6 +191,9 @@
     </div>
   </footer>
 
+  <div class="cursor" aria-hidden="true"><div class="cursor-dot"></div></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="ripple-container" aria-hidden="true"></div>
   <script src="main.js"></script>
 </body>
 </html>
